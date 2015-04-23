@@ -127,25 +127,20 @@ proctype Scheduler() {
 proctype LinearLightSet (bit i) {
   do
   ::state_L[i] == RED ->
-    ch_toL[i]?ADVANCE -> state_L[i] = GREEN; ch_toL[i]!PRE_STOP; state_P[i] = DONT_WALK;
-  ::state_L[i] == ORANGE ->
-    ch_toL[i]?STOP -> state_L[i] = RED; state_P[i] = WALK;
+    atomic{ ch_toL[i]?ADVANCE -> state_L[i] = GREEN; ch_toL[i]!PRE_STOP; state_P[i] = DONT_WALK; }
+  ::state_L[i] == ORANGE -> atomic{ ch_toL[i]?STOP -> state_L[i] = RED; state_P[i] = WALK; }
   ::state_L[i] == GREEN ->
-    ch_toL[i]?PRE_STOP -> state_L[i] = ORANGE; ch_toL[i]!STOP; state_P[i] = DONT_WALK;
-  ::state_L[i] == OFF ->
-    ch_toL[i]?INIT -> state_L[i] = RED; state_P[i] = WALK;
+    atomic{ ch_toL[i]?PRE_STOP -> state_L[i] = ORANGE; ch_toL[i]!STOP; state_P[i] = DONT_WALK; }
+  ::state_L[i] == OFF -> atomic{ ch_toL[i]?INIT -> state_L[i] = RED; state_P[i] = WALK; }
   od
 }
 
 proctype TurnLightSet (bit i) {
   do
-  ::state_T[i] == RED -> ch_toT[i]?ADVANCE -> state_T[i] = GREEN; ch_toT[i]!PRE_STOP; 
-  ::state_T[i] == ORANGE ->
-    ch_toT[i]?STOP -> state_T[i] = RED; 
-  ::state_T[i] == GREEN ->
-    ch_toT[i]?PRE_STOP -> state_T[i] = ORANGE; ch_toT[i]!STOP;
-  ::state_T[i] == OFF ->
-    ch_toT[i]?INIT -> state_T[i] = RED; 
+  ::state_T[i] == RED -> atomic{ ch_toT[i]?ADVANCE -> state_T[i] = GREEN; ch_toT[i]!PRE_STOP; } 
+  ::state_T[i] == ORANGE -> atomic{ ch_toT[i]?STOP -> state_T[i] = RED; } 
+  ::state_T[i] == GREEN -> atomic{ ch_toT[i]?PRE_STOP -> state_T[i] = ORANGE; ch_toT[i]!STOP; }
+  ::state_T[i] == OFF -> atomic{ ch_toT[i]?INIT -> state_T[i] = RED; } 
   od
 }
 
