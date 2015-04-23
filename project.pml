@@ -4,6 +4,19 @@ mtype = {INIT, ADVANCE, PRE_STOP, STOP, ALL_STOP}
 chan ch_toT[2] = [1] of { mtype };
 chan ch_toL[2] = [1] of { mtype };
 
+/* when a pedestrian light is on WALK, the opposite vehicle stoplight must be RED */
+ltl p1 {[](state_P[0]=WALK -> state_L[1]=RED)}
+ltl p2 {[](state_P[1]=WALK -> state_L[0]=RED)}
+/* when a pedestrian light is on WALK, all vehicle turn lights must be RED */
+ltl p3 {[](state_P[0]=WALK -> (state_T[1]=RED && state_T[0]=RED))}
+ltl p4 {[](state_P[1]=WALK -> (state_T[1]=RED && state_T[0]=RED))}
+/* a pedestrian light is switched to WALK after the opposite vehicular lights have been switched to RED */
+ltl p5 {state_L[0]=RED -> X(state_P[1]=WALK)}
+ltl p6 {state_L[1]=RED -> X(state_P[0]=WALK)}
+/* a pedestrian light is switched to DON’T WALK before the opposite vehicular lights are switched to GREEN */
+ltl p7 {(state_L[0]=WALK) U (state_L[1]=GREEN)}
+ltl p8 {(state_L[1]=WALK) U (state_L[0]=GREEN)}
+
 /* Current state of lights. */
 mtype state_L[2];
 mtype state_T[2];
