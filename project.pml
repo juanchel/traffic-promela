@@ -1,5 +1,5 @@
 mtype = {OFF, RED, GREEN, ORANGE, WALK, DONT_WALK};
-mtype = {INIT, ADVANCE, PRE_STOP, STOP, ALL_STOP}
+mtype = {INIT, ADVANCE, PRE_STOP, STOP, ALL_STOP};
 
 chan ch_toT[2] = [1] of { mtype };
 chan ch_toL[2] = [1] of { mtype };
@@ -7,6 +7,9 @@ chan ch_toL[2] = [1] of { mtype };
 /* Current state of lights. */
 mtype state_L[2];
 mtype state_T[2];
+
+//record whether a cycle has been completed by Linear Light
+bit cycleForLCompleted[2];
 
 /* Pedestrian Light. */
 mtype state_P[2];
@@ -44,16 +47,19 @@ proctype Operator() {
   state_T[0] = OFF;
   state_T[1] = OFF;
   
+  cycleForLCompleted[0]=false;
+  cycleForLCompleted[1]=false;
+  
   /*part of initialization*/
   
   /*turnOnStopLights*/
-  mutex_L[0] == 0; /*wait for lock*/
+  mutex_L[0] = 0; /*wait for lock*/
   mutex_L[0] = 1; /*lock*/
   d_step{
     ch_toL[0]!INIT;
     mutex_L[0] = 0; /*unlock*/
   }
-  mutex_L[1] == 0; /*wait for lock*/
+  mutex_L[1] = 0; /*wait for lock*/
   mutex_L[1] = 1; /*lock*/
   d_step{
     ch_toL[1]!INIT;
@@ -61,13 +67,13 @@ proctype Operator() {
   }
   
   /*turnOnTurnLights*/
-  mutex_T[0] == 0; /*wait for lock*/
+  mutex_T[0] = 0; /*wait for lock*/
   mutex_T[0] = 1; /*lock*/
   d_step{
     ch_toT[0]!INIT;
     mutex_T[0] = 0; /*unlock*/
   }
-  mutex_T[1] == 0; /*wait for lock*/
+  mutex_T[1] = 0; /*wait for lock*/
   mutex_T[1] = 1; /*lock*/
   d_step{
     ch_toT[1]!INIT;
@@ -84,51 +90,65 @@ proctype Scheduler() {
   run TurnLightSet(0);
   run TurnLightSet(1);
 
-  /*advanceLinearLights();*/
-  mutex_L[0] == 0; /*wait for lock*/
-  mutex_L[0] = 1; /*lock*/
-  d_step{
-    ch_toL[0]!ADVANCE;
-    mutex_L[0] = 0; /*unlock*/
-  }
-  mutex_L[1] == 0; /*wait for lock*/
-  mutex_L[1] = 1; /*lock*/
-  d_step{
-    ch_toL[1]!ADVANCE;
-    mutex_L[1] = 0; /*unlock*/
-  }
-  
-  /*blockPedestrians();*/
-  state_P[0] = DONT_WALK;
-  ch_toL[0]!ALL_STOP;
-  state_P[1] = DONT_WALK;
-  ch_toL[1]!ALL_STOP;
-  
-  /*advanceTurnLights();*/
-  mutex_T[0] == 0; /*wait for lock*/
-  mutex_T[0] = 1; /*lock*/
-  d_step{
-    ch_toT[0]!ADVANCE;
-    mutex_T[0] = 0; /*unlock*/
-  }
-  mutex_T[1] == 0; /*wait for lock*/
-  mutex_T[1] = 1; /*lock*/
-  d_step{
-    ch_toT[1]!ADVANCE;
-    mutex_T[1] = 0; /*unlock*/
-  }
-  
-  /*unblockPedestrians();*/
-  state_P[0] = WALK;
-  state_P[1] = WALK;
+	  /*advanceLinearLights();*/
+	  replay: mutex_L[0] = 0; /*wait for lock*/
+	  d_step{
+	  mutex_L[0] = 1; /*lock*/
+
+	    ch_toL[0]!ADVANCE;
+	    cycleForLCompleted[0]=false;
+	    mutex_L[0] = 0; /*unlock*/
+	  }
+	  mutex_L[1] = 0; /*wait for lock*/
+	  d_step{
+	  mutex_L[1] = 1; /*lock*/
+
+      //log("Going into d_step");
+	    ch_toL[1]!ADVANCE;
+	    cycleForLCompleted[1]=false;
+	    mutex_L[1] = 0; /*unlock*/
+	  }
+	  
+	  /*blockPedestrians();*/
+	  state_P[0] = DONT_WALK;
+    cycleForLCompleted[0]==true;
+	  ch_toL[0]!ALL_STOP;
+	  state_P[1] = DONT_WALK;
+    cycleForLCompleted[1]==true;
+	  ch_toL[1]!ALL_STOP;
+	  
+	  /*advanceTurnLights();*/
+	  mutex_T[0] = 0; /*wait for lock*/
+	  	  d_step{
+	  mutex_T[0] = 1; /*lock*/
+
+	    ch_toT[0]!ADVANCE;
+	    mutex_T[0] = 0; /*unlock*/
+	  }
+	  mutex_T[1] = 0; /*wait for lock*/
+	  	  d_step{
+	  mutex_T[1] = 1; /*lock*/
+
+	    ch_toT[1]!ADVANCE;
+	    mutex_T[1] = 0; /*unlock*/
+	  }
+	  
+	  /*unblockPedestrians();*/
+	  state_P[0] = WALK;
+	  state_P[1] = WALK;
+   goto replay;
 
 }
 
 proctype LinearLightSet (bit i) {
   do
   ::state_L[i] == RED ->
-    atomic{ ch_toL[i]?ADVANCE -> state_L[i] = GREEN; ch_toL[i]!PRE_STOP; state_P[i] = DONT_WALK; }
-  ::state_L[i] == ORANGE -> atomic{ ch_toL[i]?STOP -> state_L[i] = RED; state_P[i] = WALK; }
+  	::if
+      ::ch_toL[i]?ADVANCE -> atomic{state_L[i] = GREEN; ch_toL[i]!PRE_STOP; state_P[i] = DONT_WALK};
+	  ::ch_toL[i]?ALL_STOP -> atomic{state_L[i] = RED};
+	  fi
+	::else -> skip;
+  ::state_L[i] == ORANGE -> atomic{ ch_toL[i]?STOP -> state_L[i] = RED; 	    cycleForLCompleted[i]=true; state_P[i] = WALK; }
   ::state_L[i] == GREEN ->
     atomic{ ch_toL[i]?PRE_STOP -> state_L[i] = ORANGE; ch_toL[i]!STOP; state_P[i] = DONT_WALK; }
   ::state_L[i] == OFF -> atomic{ ch_toL[i]?INIT -> state_L[i] = RED; state_P[i] = WALK; }
