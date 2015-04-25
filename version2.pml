@@ -47,13 +47,13 @@ proctype Operator() {
   /*part of initialization*/
   
   /*turnOnStopLights*/
-  mutex_L[0] == 0; /*wait for lock*/
+  mutex_L[0] = 0; /*wait for lock*/
   mutex_L[0] = 1; /*lock*/
   d_step{
     ch_toL[0]!INIT;
     mutex_L[0] = 0; /*unlock*/
   }
-  mutex_L[1] == 0; /*wait for lock*/
+  mutex_L[1] = 0; /*wait for lock*/
   mutex_L[1] = 1; /*lock*/
   d_step{
     ch_toL[1]!INIT;
@@ -61,13 +61,13 @@ proctype Operator() {
   }
   
   /*turnOnTurnLights*/
-  mutex_T[0] == 0; /*wait for lock*/
+  mutex_T[0] = 0; /*wait for lock*/
   mutex_T[0] = 1; /*lock*/
   d_step{
     ch_toT[0]!INIT;
     mutex_T[0] = 0; /*unlock*/
   }
-  mutex_T[1] == 0; /*wait for lock*/
+  mutex_T[1] = 0; /*wait for lock*/
   mutex_T[1] = 1; /*lock*/
   d_step{
     ch_toT[1]!INIT;
@@ -85,24 +85,27 @@ proctype Scheduler() {
   run TurnLightSet(1);
 
 	  /*advanceLinearLights();*/
-	  replay: mutex_L[0] == 0; /*wait for lock*/
+	  replay: mutex_L[0] = 0; /*wait for lock*/
 	  mutex_L[0] = 1; /*lock*/
 	  d_step{
 	    ch_toL[0]!ADVANCE;
 	    mutex_L[0] = 0; /*unlock*/
 	  }
-	  mutex_L[1] == 0; /*wait for lock*/
+	  mutex_L[1] = 0; /*wait for lock*/
 	  mutex_L[1] = 1; /*lock*/
 	  d_step{
+      //log("Going into d_step");
 	    ch_toL[1]!ADVANCE;
 	    mutex_L[1] = 0; /*unlock*/
 	  }
 	  
 	  /*blockPedestrians();*/
 	  state_P[0] = DONT_WALK;
-	  /*ch_toL[0]!ALL_STOP;*/
+    state_L[0] == RED;
+	  ch_toL[0]!ALL_STOP;
 	  state_P[1] = DONT_WALK;
-	  /*ch_toL[1]!ALL_STOP;*/
+    state_L[1] == RED;
+	  ch_toL[1]!ALL_STOP;
 	  
 	  /*advanceTurnLights();*/
 	  mutex_T[0] == 0; /*wait for lock*/
