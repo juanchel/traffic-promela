@@ -26,11 +26,11 @@ ltl p2 {[](state_P[1] == WALK -> state_L[0] == RED)}
 ltl p3 {[](state_P[0] == WALK -> (state_T[1] == RED && state_T[0] == RED))}
 ltl p4 {[](state_P[1] == WALK -> (state_T[1] == RED && state_T[0] == RED))}
 /* a pedestrian light is switched to WALK after the opposite vehicular lights have been switched to RED */
-ltl p5 {state_L[0] == RED -> X(state_P[1] == WALK)}
-ltl p6 {state_L[1] == RED -> X(state_P[0] == WALK)}
+ltl p5 {[]((state_L[0] == RED) -> ((state_P[1] == DONT_WALK) && X(state_P[1] == WALK)))}
+ltl p6 {[]((state_L[1] == RED) -> ((state_P[0] == DONT_WALK) && X(state_P[0] == WALK)))}
 /* a pedestrian light is switched to DON’T WALK before the opposite vehicular lights are switched to GREEN */
-ltl p7 {(state_L[0] == WALK) U (state_L[1] == GREEN)}
-ltl p8 {(state_L[1] == WALK) U (state_L[0] == GREEN)}
+ltl p7 {[](((state_P[1] == WALK) && X(state_P[1] == DONT_WALK)) -> (state_L[0] == GREEN))}
+ltl p8 {[](((state_P[0] == WALK) && X(state_P[0] == DONT_WALK)) -> (state_L[1] == GREEN))}
 
 /* incoming pedestrians from any direction can cross the intersection in that direction */
 ltl p9 {(state_P[0] == DONT_WALK) -> []<>(state_P[0] == WALK)}
@@ -48,26 +48,26 @@ ltl p16 {(state_T[0] == ORANGE) -> []<>(state_T[0] == GREEN)}
 ltl p17 {(state_T[1] == RED) -> []<>(state_T[1] == GREEN)}
 ltl p18 {(state_T[1] == ORANGE) -> []<>(state_T[1] == GREEN)}
 
-/* For any vehicle light (stoplight or turn light), always: the signal eventually turns ORANGE /*
-/*
-No idea about how to verify this property
-*/
+/* For any vehicle light (stoplight or turn light), always: the signal eventually turns ORANGE */
+ltl p19 {[]<>(state_L[0] == ORANGE)}
+ltl p20 {[]<>(state_L[1] == ORANGE)}
+ltl p21 {[]<>(state_T[0] == ORANGE)}
+ltl p22 {[]<>(state_T[1] == ORANGE)}
+
 /* For any vehicle light (stoplight or turn light), always: if a GREEN signal is on, 
 it stays on until the signal turns ORANGE */
-/*
-ltl p19 {[](state_L[0] == GREEN) U (state_L[0] == ORANGE)}
-ltl p20 {[](state_L[1] == GREEN) U (state_L[1] == ORANGE)}
-ltl p21 {[](state_T[0] == GREEN) U (state_T[0] == ORANGE)}
-ltl p22 {[](state_T[1] == GREEN) U (state_T[1] == ORANGE)}
-*/
+ltl p21 {[]((state_L[0] ==  GREEN) -> ((state_L[0] == GREEN) U (state_L[0] == ORANGE)))}
+ltl p22 {[]((state_L[1] ==  GREEN) -> ((state_L[1] == GREEN) U (state_L[1] == ORANGE)))}
+ltl p23 {[]((state_T[0] ==  GREEN) -> ((state_T[0] == GREEN) U (state_T[0] == ORANGE)))}
+ltl p24 {[]((state_T[1] ==  GREEN) -> ((state_T[1] == GREEN) U (state_T[1] == ORANGE)))}
+
 /* For any vehicle light (stoplight or turn light), 
 always: if a RED signal is on, it stays on until the signal turns GREEN */
-/*
-ltl p23 {[](state_L[0] == GREEN) U (state_L[0] == RED)}
-ltl p24 {[](state_L[1] == GREEN) U (state_L[1] == RED)}
-ltl p25 {[](state_T[0] == GREEN) U (state_T[0] == RED)}
-ltl p26 {[](state_T[1] == GREEN) U (state_T[1] == RED)}
-*/
+ltl p25 {[]((state_L[0] ==  RED) -> ((state_L[0] == RED) U (state_L[0] == GREEN)))}
+ltl p26 {[]((state_L[1] ==  RED) -> ((state_L[1] == RED) U (state_L[1] == GREEN)))}
+ltl p27 {[]((state_T[0] ==  RED) -> ((state_T[0] == RED) U (state_T[0] == GREEN)))}
+ltl p28 {[]((state_T[1] ==  RED) -> ((state_T[1] == RED) U (state_T[1] == GREEN)))}
+
 
 /* Client = Operator(of intersection controller) = Main */
 /* A Kickstarter, where scheduling logic runs in its own thread */
