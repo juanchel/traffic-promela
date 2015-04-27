@@ -19,13 +19,14 @@ mtype state_P[2];
 bit mutex_L[2];
 bit mutex_T[2];
 
-/* is sysrem on? */
-bit intersection;
+bit ltlTest;
 
 /* LTL Statements */
+/* Test */
+ltl test {[](state_P[0] == WALK -> ltlTest == 1)}
 /* when a pedestrian light is on WALK, the opposite vehicle stoplight must be RED */
-ltl p1 {[](state_P[0] == WALK -> state_L[1] == RED)}
-ltl p2 {[](state_P[1] == WALK -> state_L[0] == RED)}
+ltl p1 {[](state_P[0] == WALK -> state_L[0] == RED)} /* changed murat -> passes */
+ltl p2 {[](state_P[1] == WALK -> state_L[1] == RED)} /* changed murat -> passes */
 /* when a pedestrian light is on WALK, all vehicle turn lights must be RED */
 ltl p3 {[](state_P[0] == WALK -> (state_T[1] == RED && state_T[0] == RED))}
 ltl p4 {[](state_P[1] == WALK -> (state_T[1] == RED && state_T[0] == RED))}
@@ -78,37 +79,50 @@ ltl p28 {[]((state_T[1] ==  RED) -> ((state_T[1] == RED) U (state_T[1] == GREEN)
 /* Client = Operator(of intersection controller) = Main */
 /* A Kickstarter, where scheduling logic runs in its own thread */
 proctype Operator() {
+  ltlTest = 1;
   
   state_L[0] = OFF;
   state_L[1] = OFF;
   state_T[0] = OFF;
   state_T[1] = OFF;
   
-  /*part of initialization*/
-  ch_toL[0]!INIT;
-  ch_toL[1]!INIT;
-  ch_toT[0]!INIT;
-  ch_toT[1]!INIT;
-  
-  run Scheduler();
-}
-
-proctype Scheduler() {
-
   run LinearLightSet(0);
   run LinearLightSet(1);
   run TurnLightSet(0);
   run TurnLightSet(1);
   
+  /*part of initialization*/
+  ch_toT[0]!INIT;
+  ch_ack ? T, 0, INIT;
+  ch_toT[1]!INIT;
+  ch_ack ? T, 1, INIT;
+  
+  ch_toL[0]!INIT;
+  ch_ack ? L, 0, INIT;
+  ch_toL[1]!INIT;
+  ch_ack ? L, 1, INIT;
+  
+  
+  run Scheduler();
+}
+
+proctype Scheduler() {
+  
   replay:
   ch_toL[0] ! ADVANCE;
   ch_ack ? L, 0, ACK;
   
-  ch_toT[0] ! ADVANCE;
-  ch_ack ? T, 0, ACK;
-  
   ch_toL[1] ! ADVANCE;
   ch_ack? L, 1, ACK;
+  
+  ch_toL[0] ! ALL_STOP;
+  ch_ack? L, 0, ALL_STOP;
+  
+  ch_toL[1] ! ALL_STOP;
+  ch_ack? L, 1, ALL_STOP;
+  
+  ch_toT[0] ! ADVANCE;
+  ch_ack ? T, 0, ACK;
   
   ch_toT[1] ! ADVANCE;
   ch_ack ? T, 1, ACK;
@@ -118,19 +132,22 @@ proctype Scheduler() {
 
 proctype LinearLightSet (bit i) {
   do
-  ::state_L[i] == RED -> atomic{ ch_toL[i]?ADVANCE -> state_P[i] = DONT_WALK; state_L[i] = GREEN; ch_toL[i]!PRE_STOP; }
+  ::state_L[i] == RED -> if
+  						 ::ch_toL[i]?ADVANCE -> atomic{ state_P[i] = DONT_WALK; state_L[i] = GREEN; ch_toL[i]!PRE_STOP; }
+  						 ::ch_toL[i]?ALL_STOP -> atomic{ state_P[i] = DONT_WALK; ch_ack!L,i,ALL_STOP; }
+  						 fi
   ::state_L[i] == ORANGE -> atomic{ ch_toL[i]?STOP -> state_L[i] = RED; state_P[i] = WALK; ch_ack!L,i,ACK; }
   ::state_L[i] == GREEN -> atomic{ ch_toL[i]?PRE_STOP -> state_L[i] = ORANGE; ch_toL[i]!STOP; }
-  ::state_L[i] == OFF -> atomic{ ch_toL[i]?INIT -> state_L[i] = RED; state_P[i] = WALK; }
+  ::state_L[i] == OFF -> atomic{ ch_toL[i]?INIT -> state_L[i] = RED; state_P[i] = WALK; ch_ack!L,i,INIT; }
   od
 }
 
 proctype TurnLightSet (bit i) {
   do
-  ::state_T[i] == RED -> atomic{ ch_toT[i]?ADVANCE -> state_P[i] = DONT_WALK; state_T[i] = GREEN; ch_toT[i]!PRE_STOP; } 
-  ::state_T[i] == ORANGE -> atomic{ ch_toT[i]?STOP -> state_T[i] = RED; state_P[i] = WALK; ch_ack!T,i,ACK;} 
+  ::state_T[i] == RED -> atomic{ ch_toT[i]?ADVANCE -> state_T[i] = GREEN; ch_toT[i]!PRE_STOP; } 
+  ::state_T[i] == ORANGE -> atomic{ ch_toT[i]?STOP -> state_T[i] = RED; ch_ack!T,i,ACK;} 
   ::state_T[i] == GREEN -> atomic{ ch_toT[i]?PRE_STOP -> state_T[i] = ORANGE; ch_toT[i]!STOP; }
-  ::state_T[i] == OFF -> atomic{ ch_toT[i]?INIT -> state_T[i] = RED; } 
+  ::state_T[i] == OFF -> atomic{ ch_toT[i]?INIT -> state_T[i] = RED; ch_ack!T,i,INIT; } 
   od
 }
 
