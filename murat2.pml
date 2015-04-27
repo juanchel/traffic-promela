@@ -2,7 +2,6 @@ mtype = {OFF, RED, GREEN, ORANGE, WALK, DONT_WALK};
 mtype = {INIT, ADVANCE, PRE_STOP, STOP, ALL_STOP};
 mtype = {L, T};
 mtype = {ACK};
-mtype = {ENABLED, DISABLED, FAILED};
 
 chan ch_toT[2] = [1] of { mtype };
 chan ch_toL[2] = [1] of { mtype };
@@ -18,7 +17,6 @@ mtype state_P[2];
 /* Mutex for light sets. Used for synchronization. */
 
 bit ltlTest;
-bit initComplete = 0;
 
 /* LTL Statements */
 /* Test */
@@ -39,6 +37,9 @@ ltl p8 {[](((state_P[0] == WALK) && X(state_P[0] == DONT_WALK)) -> (state_L[1] =
 /* incoming pedestrians from any direction can cross the intersection in that direction */
 ltl p9 {(state_P[0] == DONT_WALK) -> []<>(state_P[0] == WALK)} /* passes but only 1 state stored? */
 ltl p10 {(state_P[1] == DONT_WALK) -> []<>(state_P[1] == WALK)} /* passes but only 1 state stored? */
+
+ltl p9b {[]((state_P[0] == DONT_WALK) -> <>(state_P[0] == WALK))} /* passes */
+ltl p10b {(state_P[1] == DONT_WALK) -> []<>(state_P[1] == WALK)} /* passes */
 
 /* incoming vehicles from any direction can cross the intersection in that direction */
 ltl p11 {(state_L[0] == RED) -> []<>(state_L[0] == GREEN)} /* passes but only 1 state stored? */
