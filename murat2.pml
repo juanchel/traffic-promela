@@ -16,10 +16,9 @@ mtype state_T[2];
 mtype state_P[2];
 
 /* Mutex for light sets. Used for synchronization. */
-bit mutex_L[2];
-bit mutex_T[2];
 
 bit ltlTest;
+bit initComplete = 0;
 
 /* LTL Statements */
 /* Test */
@@ -28,50 +27,50 @@ ltl test {[](state_P[0] == WALK -> ltlTest == 1)}
 ltl p1 {[](state_P[0] == WALK -> state_L[0] == RED)} /* changed murat -> passes */
 ltl p2 {[](state_P[1] == WALK -> state_L[1] == RED)} /* changed murat -> passes */
 /* when a pedestrian light is on WALK, all vehicle turn lights must be RED */
-ltl p3 {[](state_P[0] == WALK -> (state_T[1] == RED && state_T[0] == RED))}
-ltl p4 {[](state_P[1] == WALK -> (state_T[1] == RED && state_T[0] == RED))}
+ltl p3 {[](state_P[0] == WALK -> (state_T[1] == RED && state_T[0] == RED))} /* passes */
+ltl p4 {[](state_P[1] == WALK -> (state_T[1] == RED && state_T[0] == RED))} /* passes */
 /* a pedestrian light is switched to WALK after the opposite vehicular lights have been switched to RED */
-ltl p5 {[]((state_L[0] == RED) -> ((state_P[1] == DONT_WALK) && X(state_P[1] == WALK)))}
-ltl p6 {[]((state_L[1] == RED) -> ((state_P[0] == DONT_WALK) && X(state_P[0] == WALK)))}
+ltl p5 {[]((state_L[0] == RED) -> ((state_P[1] == DONT_WALK) && X(state_P[1] == WALK)))} /* fails during Initialization phase */
+ltl p6 {[]((state_L[1] == RED) -> ((state_P[0] == DONT_WALK) && X(state_P[0] == WALK)))} /* fails during Initialization phase */
 /* a pedestrian light is switched to DON’T WALK before the opposite vehicular lights are switched to GREEN */
-ltl p7 {[](((state_P[1] == WALK) && X(state_P[1] == DONT_WALK)) -> (state_L[0] == GREEN))}
-ltl p8 {[](((state_P[0] == WALK) && X(state_P[0] == DONT_WALK)) -> (state_L[1] == GREEN))}
+ltl p7 {[](((state_P[1] == WALK) && X(state_P[1] == DONT_WALK)) -> (state_L[0] == GREEN))} /* fails during Initialization phase */
+ltl p8 {[](((state_P[0] == WALK) && X(state_P[0] == DONT_WALK)) -> (state_L[1] == GREEN))} /* fails during Initialization phase */
 
 /* incoming pedestrians from any direction can cross the intersection in that direction */
-ltl p9 {(state_P[0] == DONT_WALK) -> []<>(state_P[0] == WALK)}
-ltl p10 {(state_P[1] == DONT_WALK) -> []<>(state_P[1] == WALK)}
+ltl p9 {(state_P[0] == DONT_WALK) -> []<>(state_P[0] == WALK)} /* passes but only 1 state stored? */
+ltl p10 {(state_P[1] == DONT_WALK) -> []<>(state_P[1] == WALK)} /* passes but only 1 state stored? */
 
 /* incoming vehicles from any direction can cross the intersection in that direction */
-ltl p11 {(state_L[0] == RED) -> []<>(state_L[0] == GREEN)}
-ltl p12 {(state_L[0] == ORANGE) -> []<>(state_L[0] == GREEN)}
-ltl p13 {(state_L[1] == RED) -> []<>(state_L[1] == GREEN)}
-ltl p14 {(state_L[1] == ORANGE) -> []<>(state_L[1] == GREEN)}
+ltl p11 {(state_L[0] == RED) -> []<>(state_L[0] == GREEN)} /* passes but only 1 state stored? */
+ltl p12 {(state_L[0] == ORANGE) -> []<>(state_L[0] == GREEN)} /* passes but 1 state? */
+ltl p13 {(state_L[1] == RED) -> []<>(state_L[1] == GREEN)} /* passes but 1 state? */
+ltl p14 {(state_L[1] == ORANGE) -> []<>(state_L[1] == GREEN)} /* passes but 1 state? */
 
 /* incoming vehicles from any direction can make a protected left turn */
-ltl p15 {(state_T[0] == RED) -> []<>(state_T[0] == GREEN)}
-ltl p16 {(state_T[0] == ORANGE) -> []<>(state_T[0] == GREEN)}
-ltl p17 {(state_T[1] == RED) -> []<>(state_T[1] == GREEN)}
-ltl p18 {(state_T[1] == ORANGE) -> []<>(state_T[1] == GREEN)}
+ltl p15 {(state_T[0] == RED) -> []<>(state_T[0] == GREEN)} /* passes but 1 state? */
+ltl p16 {(state_T[0] == ORANGE) -> []<>(state_T[0] == GREEN)} /* passes but 1 state? */
+ltl p17 {(state_T[1] == RED) -> []<>(state_T[1] == GREEN)} /* passes but 1 state? */
+ltl p18 {(state_T[1] == ORANGE) -> []<>(state_T[1] == GREEN)} /* passes but 1 state? */
 
 /* For any vehicle light (stoplight or turn light), always: the signal eventually turns ORANGE */
-ltl p19 {[]<>(state_L[0] == ORANGE)}
-ltl p20 {[]<>(state_L[1] == ORANGE)}
-ltl p21 {[]<>(state_T[0] == ORANGE)}
-ltl p22 {[]<>(state_T[1] == ORANGE)}
+ltl p19 {[]<>(state_L[0] == ORANGE)} /* passes */
+ltl p20 {[]<>(state_L[1] == ORANGE)} /* passes */
+ltl p21 {[]<>(state_T[0] == ORANGE)} /* passes */
+ltl p22 {[]<>(state_T[1] == ORANGE)} /* passes */
 
 /* For any vehicle light (stoplight or turn light), always: if a GREEN signal is on, 
 it stays on until the signal turns ORANGE */
-ltl p21 {[]((state_L[0] ==  GREEN) -> ((state_L[0] == GREEN) U (state_L[0] == ORANGE)))}
-ltl p22 {[]((state_L[1] ==  GREEN) -> ((state_L[1] == GREEN) U (state_L[1] == ORANGE)))}
-ltl p23 {[]((state_T[0] ==  GREEN) -> ((state_T[0] == GREEN) U (state_T[0] == ORANGE)))}
-ltl p24 {[]((state_T[1] ==  GREEN) -> ((state_T[1] == GREEN) U (state_T[1] == ORANGE)))}
+ltl p23 {[]((state_L[0] ==  GREEN) -> ((state_L[0] == GREEN) U (state_L[0] == ORANGE)))} /* passes */
+ltl p24 {[]((state_L[1] ==  GREEN) -> ((state_L[1] == GREEN) U (state_L[1] == ORANGE)))} /* passes */
+ltl p25 {[]((state_T[0] ==  GREEN) -> ((state_T[0] == GREEN) U (state_T[0] == ORANGE)))} /* passes */
+ltl p26 {[]((state_T[1] ==  GREEN) -> ((state_T[1] == GREEN) U (state_T[1] == ORANGE)))} /* passes */
 
 /* For any vehicle light (stoplight or turn light), 
 always: if a RED signal is on, it stays on until the signal turns GREEN */
-ltl p25 {[]((state_L[0] ==  RED) -> ((state_L[0] == RED) U (state_L[0] == GREEN)))}
-ltl p26 {[]((state_L[1] ==  RED) -> ((state_L[1] == RED) U (state_L[1] == GREEN)))}
-ltl p27 {[]((state_T[0] ==  RED) -> ((state_T[0] == RED) U (state_T[0] == GREEN)))}
-ltl p28 {[]((state_T[1] ==  RED) -> ((state_T[1] == RED) U (state_T[1] == GREEN)))}
+ltl p27 {[]((state_L[0] ==  RED) -> ((state_L[0] == RED) U (state_L[0] == GREEN)))} /* passes */
+ltl p28 {[]((state_L[1] ==  RED) -> ((state_L[1] == RED) U (state_L[1] == GREEN)))} /* passes */
+ltl p29 {[]((state_T[0] ==  RED) -> ((state_T[0] == RED) U (state_T[0] == GREEN)))} /* passes */
+ltl p30 {[]((state_T[1] ==  RED) -> ((state_T[1] == RED) U (state_T[1] == GREEN)))} /* passes */
 
 
 
@@ -91,6 +90,7 @@ proctype Operator() {
   run TurnLightSet(0);
   run TurnLightSet(1);
   
+  
   /*part of initialization*/
   ch_toT[0]!INIT;
   ch_ack ? T, 0, INIT;
@@ -101,7 +101,6 @@ proctype Operator() {
   ch_ack ? L, 0, INIT;
   ch_toL[1]!INIT;
   ch_ack ? L, 1, INIT;
-  
   
   run Scheduler();
 }
@@ -138,7 +137,7 @@ proctype LinearLightSet (bit i) {
   						 fi
   ::state_L[i] == ORANGE -> atomic{ ch_toL[i]?STOP -> state_L[i] = RED; state_P[i] = WALK; ch_ack!L,i,ACK; }
   ::state_L[i] == GREEN -> atomic{ ch_toL[i]?PRE_STOP -> state_L[i] = ORANGE; ch_toL[i]!STOP; }
-  ::state_L[i] == OFF -> atomic{ ch_toL[i]?INIT -> state_L[i] = RED; state_P[i] = WALK; ch_ack!L,i,INIT; }
+  ::state_L[i] == OFF -> atomic{ ch_toL[i]?INIT -> state_P[i] = DONT_WALK; state_L[i] = RED; ch_ack!L,i,INIT; }
   od
 }
 
