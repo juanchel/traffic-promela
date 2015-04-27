@@ -1,0 +1,1195 @@
+————————————————————P1————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p1
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p1
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p1)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+      666 states, stored
+     1121 states, matched
+     1787 transitions (= stored+matched)
+      144 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.122	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+
+————————————————————P2————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p2
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p2
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p2)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+      666 states, stored
+     1121 states, matched
+     1787 transitions (= stored+matched)
+      144 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.122	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P3————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p3
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p3
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p3)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+      666 states, stored
+     1121 states, matched
+     1787 transitions (= stored+matched)
+      144 atomic steps
+hash conflicts:         3 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.122	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P4————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p4
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p4
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p4)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+      666 states, stored
+     1121 states, matched
+     1787 transitions (= stored+matched)
+      144 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.122	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P5————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p5
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p5
+pan:1: assertion violated  !( !((state_P[1]==2))) (at depth 53)
+pan: wrote murat2.pml.trail
+
+(Spin Version 6.4.3 -- 16 December 2014)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p5)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 156 byte, depth reached 53, errors: 1
+       26 states, stored
+        0 states, matched
+       26 transitions (= stored+matched)
+        3 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.005	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P6————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p6
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p6
+pan:1: assertion violated  !( !((state_P[0]==2))) (at depth 62)
+pan: wrote murat2.pml.trail
+
+(Spin Version 6.4.3 -- 16 December 2014)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p6)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 156 byte, depth reached 62, errors: 1
+       30 states, stored
+        0 states, matched
+       30 transitions (= stored+matched)
+        4 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.005	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P7————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p7
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p7
+pan:1: assertion violated  !((state_P[1]==1)) (at depth 124)
+pan: wrote murat2.pml.trail
+
+(Spin Version 6.4.3 -- 16 December 2014)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p7)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 124, errors: 1
+       74 states, stored
+        0 states, matched
+       74 transitions (= stored+matched)
+       13 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.014	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P8————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p8
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p8
+pan:1: assertion violated  !((state_P[0]==1)) (at depth 115)
+pan: wrote murat2.pml.trail
+
+(Spin Version 6.4.3 -- 16 December 2014)
+Warning: Search not completed
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p8)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 115, errors: 1
+       75 states, stored
+        0 states, matched
+       75 transitions (= stored+matched)
+       13 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.014	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P9————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p9
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p9
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p9)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 116 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P10————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p10
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p10
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p10)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 116 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P11————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p11
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p11
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p11)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 116 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P12————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p12
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p12
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p12)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 116 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P13————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p12
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p12
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p12)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 116 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P14————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p14
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p14
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p14)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 116 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P15————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p15
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p15
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p15)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 116 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P16————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p16
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p16
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p16)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 116 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P17————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p17
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p17
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p17)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 116 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P18————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p18
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p18
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p18)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 116 byte, depth reached 0, errors: 0
+        1 states, stored
+        0 states, matched
+        1 transitions (= stored+matched)
+        0 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.000	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P19————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p19
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p19
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p19)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+     1322 states, stored
+     3951 states, matched
+     5273 transitions (= stored+matched)
+      416 atomic steps
+hash conflicts:         3 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.242	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.316	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.827	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P20————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p20
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p20
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p20)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+     1322 states, stored
+     3951 states, matched
+     5273 transitions (= stored+matched)
+      416 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.242	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.316	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.827	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P21————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p21
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p21
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p21)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+     1322 states, stored
+     3951 states, matched
+     5273 transitions (= stored+matched)
+      416 atomic steps
+hash conflicts:        24 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.242	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.316	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.827	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P22————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p22
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p22
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p22)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+     1322 states, stored
+     3951 states, matched
+     5273 transitions (= stored+matched)
+      416 atomic steps
+hash conflicts:         3 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.242	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.316	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.827	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P23————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p23
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p23
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p23)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+      689 states, stored
+     1174 states, matched
+     1863 transitions (= stored+matched)
+      160 atomic steps
+hash conflicts:         1 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.126	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P24————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p24
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p24
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p24)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+      689 states, stored
+     1174 states, matched
+     1863 transitions (= stored+matched)
+      160 atomic steps
+hash conflicts:         4 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.126	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P25————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p25
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p25
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p25)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+      689 states, stored
+     1174 states, matched
+     1863 transitions (= stored+matched)
+      160 atomic steps
+hash conflicts:         3 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.126	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P26————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p26
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p26
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p26)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+      689 states, stored
+     1174 states, matched
+     1863 transitions (= stored+matched)
+      160 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.126	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.218	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.730	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P27————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p27
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p27
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p27)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+     1168 states, stored
+     3281 states, matched
+     4449 transitions (= stored+matched)
+      352 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.214	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.316	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.827	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P28————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p28
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p28
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p28)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+     1120 states, stored
+     3057 states, matched
+     4177 transitions (= stored+matched)
+      336 atomic steps
+hash conflicts:         1 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.205	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.316	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.827	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P29————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p29
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p29
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p29)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+     1264 states, stored
+     3729 states, matched
+     4993 transitions (= stored+matched)
+      384 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.231	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.316	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.827	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P30————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p30
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p30
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p30)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+     1216 states, stored
+     3505 states, matched
+     4721 transitions (= stored+matched)
+      368 atomic steps
+hash conflicts:         3 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.223	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.316	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.827	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P9b————————————————————
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p9b
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p9b
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p9b)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+     1056 states, stored
+     2769 states, matched
+     3825 transitions (= stored+matched)
+      320 atomic steps
+hash conflicts:         0 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.193	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.316	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.827	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
+
+————————————————————P10b————————————————————
+
+Starting verification...
+/usr/bin/gcc -DMEMLIM=1024 -DSAFETY -DXUSAFE -O2 -w -o pan pan.c
+./pan -m10000 -n -c1 -N p10b
+Verification result:
+
+warning: never claim + accept labels requires -a flag to fully verify
+pan: ltl formula p10b
+
+(Spin Version 6.4.3 -- 16 December 2014)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+ (p10b)
+	assertion violations	+ (if within scope of claim)
+	cycle checks       	- (disabled by -DSAFETY)
+	invalid end states	- (disabled by never claim)
+
+State-vector 164 byte, depth reached 677, errors: 0
+     1040 states, stored
+     2673 states, matched
+     3713 transitions (= stored+matched)
+      336 atomic steps
+hash conflicts:         1 (resolved)
+
+Stats on memory usage (in Megabytes):
+    0.190	equivalent memory usage for states (stored*(State-vector + overhead))
+    0.316	actual memory usage for states
+  128.000	memory used for hash table (-w24)
+    0.534	memory used for DFS stack (-m10000)
+  128.827	total actual memory usage
+
+
+
+pan: elapsed time 0 seconds
